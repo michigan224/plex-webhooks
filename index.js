@@ -1,6 +1,6 @@
-const express = require('express');
-const multer = require('multer');
 import fetch from 'node-fetch';
+import express from 'express';
+import multer from 'multer';
 
 var app = express();
 const port = 10224;
