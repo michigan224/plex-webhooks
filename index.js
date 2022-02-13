@@ -22,7 +22,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "on": "f" }),
+            body: JSON.stringify({ "on": false }),
         }).then(resp => { return resp.json() }).then(data => {
             console.log(data);
         }).catch(err => {
