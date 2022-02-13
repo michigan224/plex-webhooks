@@ -11,8 +11,9 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     console.log('Got webhook for', payload.event, '\nOn device', payload.Player.title);
 
     if (payload.Player.uuid === process.env.PLAYER_UUID && payload.event === "media.play") {
-        console.log('Playing track', payload.Metadata);
+        console.log('Playing track', payload.Metadata.title);
         const url = "http://" + process.env.WLED_IP + "/json/state"
+        console.log('Fetching', url);
         fetch(url, {
             method: 'POST',
             headers: {
