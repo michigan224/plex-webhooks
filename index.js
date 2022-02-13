@@ -3,7 +3,6 @@ const multer = require('multer');
 import fetch from 'node-fetch';
 
 var app = express();
-const player = 'c5bb5bd70ec7a4b755f3ad1137834e16';
 const port = 10224;
 var upload = multer({ dest: '/tmp/' });
 
@@ -11,9 +10,9 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     var payload = JSON.parse(req.body.payload);
     console.log('Got webhook for', payload.event, '\nOn device', payload.Player.title);
 
-    if (payload.Player.uuid === player && payload.event === "media.play") {
+    if (payload.Player.uuid === process.env.PLAYER_UUID && payload.event === "media.play") {
         console.log('Playing track', payload.Metadata);
-        const url = "http://" + process.env.ip + "/json/state"
+        const url = "http://" + process.env.WLED_IP + "/json/state"
         fetch(url, {
             method: 'POST',
             headers: {
