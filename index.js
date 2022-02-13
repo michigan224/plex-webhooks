@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 var app = express();
 const player = 'c5bb5bd70ec7a4b755f3ad1137834e16';
@@ -13,8 +13,8 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
 
     if (payload.Player.uuid === player && payload.event === "media.play") {
         console.log('Playing track', payload.Metadata);
-
-        fetch("http://192.168.5.12/json/state", {
+        const url = "http://" + process.env.ip + "/json/state"
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
