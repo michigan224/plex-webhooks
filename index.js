@@ -14,7 +14,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     if (payload.Player.uuid === player && payload.event === "media.play") {
         console.log('Playing track', payload.Metadata);
 
-        fetch("192.168.5.12", {
+        fetch("http://192.168.5.12/json/state", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
