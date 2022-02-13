@@ -20,9 +20,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: {
-                "on": "t",
-            },
+            body: JSON.stringify({ "on": "t" }),
         }).then(resp => { return resp.json() }).then(data => {
             console.log(data);
         }).catch(err => {
