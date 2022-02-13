@@ -8,19 +8,21 @@ var upload = multer({ dest: '/tmp/' });
 
 app.post('/', upload.single('thumb'), function (req, res, next) {
     var payload = JSON.parse(req.body.payload);
-    console.log('Got webhook for', payload.event, '\nOn device', payload.Player.title);
+    console.log('Got webhook for', payload.event,
+        '\nOn device', payload.Player.title,
+        '\nPlaying', payload.Metadata.title);
+    console.log(payload)
 
     if (payload.Player.uuid === process.env.PLAYER_UUID && payload.event === "media.play") {
-        console.log('Playing track', payload.Metadata.title);
         const url = "http://" + process.env.WLED_IP + "/json/state"
-        console.log('Fetching', url);
+        console.log('Turning off LEDs');
         fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "on": "t" }),
+            body: JSON.stringify({ "on": "f" }),
         }).then(resp => { return resp.json() }).then(data => {
             console.log(data);
         }).catch(err => {
