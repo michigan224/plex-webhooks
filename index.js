@@ -23,8 +23,8 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ "on": false }),
-        }).then(resp => { return resp.json() }).then(data => {
-            console.log(JSON.stringify(data, 0, 2));
+        }).then(resp => {
+            console.log(JSON.stringify(resp, 0, 2));
         }).catch(err => {
             console.log(err);
         });
