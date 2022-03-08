@@ -24,7 +24,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
             },
             body: JSON.stringify({ "on": false }),
         }).then(resp => { return resp.json() }).then(data => {
-            console.log(data);
+            console.log(JSON.stringify(data, 0, 2));
         }).catch(err => {
             console.log(err);
         });
