@@ -13,7 +13,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
         '\nPlaying', payload.Metadata.title);
     console.log(payload)
 
-    if (payload.Player.uuid === process.env.PLAYER_UUID && payload.event === "media.play") {
+    if (payload.Player.uuid === process.env.PLAYER_UUID && (payload.event === "media.play" || payload.event === "media.resume")) {
         const url = "http://" + process.env.WLED_IP + "/json/state"
         console.log('Turning off LEDs');
         fetch(url, {
