@@ -34,5 +34,5 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`WLED Plex Webhooks listening on port ${port}`)
 });
