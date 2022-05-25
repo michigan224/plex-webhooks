@@ -30,7 +30,7 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
         }).catch(err => {
             console.log(err);
         });
-    } else if (payload.event === "media.pause" || payload.event === "media.stop") {
+    } else if (resumed && (payload.event === "media.pause" || payload.event === "media.stop")) {
         resumed = false;
         setTimeout(checkPause, 10000);
     }
@@ -45,7 +45,7 @@ function checkPause() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "on": true, "bri": 30 }),
+        body: JSON.stringify({ "on": true, "bri": 15 }),
     }).then(resp => {
         console.log('LEDs dimmed');
     }).catch(err => {
